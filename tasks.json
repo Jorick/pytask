@@ -1,0 +1,22 @@
+[
+    {
+        "duedate": "vandaag",
+        "status": "O",
+        "text": "dit is een eerste taak"
+    },
+    {
+        "duedate": "today",
+        "status": "O",
+        "text": "This is a new discription"
+    },
+    {
+        "duedate": "overmorgen",
+        "status": "X",
+        "text": "dit is een aangepaste 3de taak"
+    },
+    {
+        "duedate": "vandaag",
+        "status": "O",
+        "text": "dit is een vierde taak"
+    }
+]
