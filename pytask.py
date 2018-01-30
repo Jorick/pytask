@@ -9,11 +9,14 @@ class Task(object):
     """ A task, it contains the following attributes:
     status = O/X the task is open or done
     text = the actual task
-    duedate = when the tasks needs to be finished
+    duedate = when the tasks needs to be finished.
     """
+
     status = 'O'
 
-    def __init__(self, text, date):
+    def __init__(self, task_id, text, date):
+        """Create a new task, takes an id, text and date."""
+        self.task_id = task_id
         self.text = text
         self.duedate = date
 
@@ -25,9 +28,11 @@ class Task(object):
                 }
 
     def edit_task_text(self, text):
+        """Change the task text."""
         self.text = text
 
     def edit_task_duedate(self, date):
+        """Date needs to be in datetime format."""
         self.duedate = date
 
 
@@ -53,10 +58,11 @@ class Task_list(object):
 
     def add_task(self):
         """Interactivally add a new task to the task_list."""
-        new_id = len(self.task_list) + 1
+        new_task_id = len(self.task_list) + 1
         new_text = input("New task discription: ")
-        new_duedate = input("When does it needs to be done?: ")
-        new_task = Task((new_id), new_text, new_duedate)
+        date_input = input("When does it needs to be done?: ")
+        new_duedate = date_conversions.text_to_date(date_input).isoformat()
+        new_task = Task((new_task_id), new_text, new_duedate)
         self.task_list.append(new_task.task_json())
 
     def mark_as_done(self):
@@ -73,7 +79,8 @@ class Task_list(object):
             print("No tasks to display yet, create your first task (n)")
         else:
             for item in self.task_list:
-                print("#" + str(self.task_list.index(item)+1) + " " + item['status'] + " - " + item['text'] + " // finished due: " + item['duedate'])
+                text_due_date = date_conversions.date_to_text(date_conversions.iso_to_date(item["duedate"]))
+                print("#" + str(self.task_list.index(item)+1) + " " + item['status'] + " - " + item['text'] + " // finished due: " + text_due_date)
 
     def edit_task_by_id(self):
         """Edit a task from a task id number."""
